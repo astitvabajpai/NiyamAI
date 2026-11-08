@@ -20,6 +20,7 @@ from pydantic import BaseModel
 from src.retrieval import get_retriever
 from src.generation import generate_answer
 from src.ui import HTMLPage
+from src.ingestion import METADATA_PATH, PDF_DIR
 
 app = FastAPI(title="NiyamAI - RBI Regulation QA")
 
