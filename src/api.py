@@ -184,9 +184,19 @@ def _check_rate(client_ip: str) -> bool:
 
 
 # ── Startup ───────────────────────────────────────────────────────────────────
+def _ensure_index():
+    """Build index from PDFs if metadata.json missing (first-boot scenario)."""
+    if METADATA_PATH.exists():
+        return
+    print("Index not found. Running ingestion...")
+    from src.ingestion import process_pdfs
+    process_pdfs(PDF_DIR)
+
+
 @app.on_event("startup")
 async def startup():
     _init_db()
+    _ensure_index()
     get_retriever()
 
 
