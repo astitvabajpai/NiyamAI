@@ -51,6 +51,3 @@ Thumbs.db
 *.tmp
 verify.py
 quick_eval.py
-.env
-data/chunks/
-data/bm25_index.pkl
