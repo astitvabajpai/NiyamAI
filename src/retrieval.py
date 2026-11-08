@@ -1,24 +1,27 @@
 """
 Hybrid retrieval: FAISS (dense) + BM25 (keyword) → RRF fusion → cross-encoder rerank.
+Uses BM25-only mode by default to keep memory under 512 MB (Render free tier).
+Set USE_DENSE=1 to enable FAISS dense retrieval (requires sentence-transformers/torch).
 """
 
+import json
+import os
 import pickle
 from pathlib import Path
 
-import faiss
-from sentence_transformers import SentenceTransformer
-from rank_bm25 import BM25Okapi
-from sentence_transformers import CrossEncoder
 import numpy as np
+import faiss
+from rank_bm25 import BM25Okapi
 
 from dotenv import load_dotenv
 load_dotenv()
 
 from src.ingestion import METADATA_PATH, FAISS_PATH, BM25_INDEX_PATH, EMBEDDING_MODEL, RERANKER_MODEL
-import json
 
-RETRIEVAL_K = int(getattr(__import__("os"), "environ").get("RETRIEVAL_K", "20"))
-RERANK_TOP_K = int(getattr(__import__("os"), "environ").get("RERANK_TOP_K", "5"))
+USE_DENSE = os.getenv("USE_DENSE", "0") == "1"
+
+RETRIEVAL_K = int(os.getenv("RETRIEVAL_K", "20"))
+RERANK_TOP_K = int(os.getenv("RERANK_TOP_K", "5"))
 
 
 class NiyamRetriever:
@@ -39,20 +42,27 @@ class NiyamRetriever:
             self.metadata = json.load(f)
         print(f"  Metadata: {len(self.metadata)} chunks")
 
-        # Load FAISS
-        self.faiss_index = faiss.read_index(str(FAISS_PATH))
-        print(f"  FAISS index: {self.faiss_index.ntotal} vectors")
-
-        # Load BM25
+        # Load BM25 (always)
         with open(BM25_INDEX_PATH, "rb") as f:
             self.bm25 = pickle.load(f)
         print("  BM25 index loaded")
 
-        # Load reranker (commented out for Render free-tier <512MB limits; skips cross-encoder ~92MB)
-        self.reranker = None
-        print("  Reranker: SKIPPED (save ~92MB for low-memory deploy)")
+        # Load FAISS + embedding model only if USE_DENSE=1
+        if USE_DENSE:
+            # Lazy imports to avoid torch (192MB) unless dense retrieval is requested
+            from sentence_transformers import SentenceTransformer, CrossEncoder
+            self.faiss_index = faiss.read_index(str(FAISS_PATH))
+            print(f"  FAISS index: {self.faiss_index.ntotal} vectors")
+            self.embed_model = SentenceTransformer(EMBEDDING_MODEL)
+            print(f"  Embedding model: {EMBEDDING_MODEL}")
+            self.reranker = CrossEncoder(RERANKER_MODEL)
+            print(f"  Reranker: {RERANKER_MODEL}")
+        else:
+            self.faiss_index = None
+            self.embed_model = None
+            self.reranker = None
+            print("  Dense retrieval SKIPPED (USE_DENSE=0, BM25-only mode for low memory)")
 
-        self.embed_model = SentenceTransformer(EMBEDDING_MODEL)
         self._loaded = True
         print("Retriever ready.")
 
@@ -61,7 +71,9 @@ class NiyamRetriever:
         return [i for i in chunk_indices if not self.metadata[i].get("superseded", False)]
 
     def dense_retrieve(self, query: str, top_k: int = 50) -> list[int]:
-        """FAISS dense retrieval."""
+        """FAISS dense retrieval. Requires USE_DENSE=1."""
+        if not self.embed_model or not self.faiss_index:
+            return []
         query_emb = self.embed_model.encode([query])
         query_emb = query_emb / np.linalg.norm(query_emb)  # normalize
         scores, indices = self.faiss_index.search(query_emb.astype(np.float32), top_k)
@@ -85,7 +97,10 @@ class NiyamRetriever:
         return sorted_indices
 
     def rerank(self, query: str, candidate_indices: list[int], top_k: int = 5) -> list[int]:
-        """Cross-encoder reranking (optimized for low-latency CPU inference)."""
+        """Cross-encoder reranking. Requires USE_DENSE=1."""
+        if not self.reranker:
+            # BM25-only mode: return top_k candidates directly
+            return candidate_indices[:top_k]
         pool = candidate_indices[:max(top_k * 3, 12)]
         candidates = [self.metadata[i]["text"] for i in pool]
         pairs = [[query, text] for text in candidates]
@@ -101,16 +116,21 @@ class NiyamRetriever:
         retrieval_k = retrieval_k or RETRIEVAL_K
         rerank_top_k = top_k or rerank_top_k or RERANK_TOP_K
 
-        # Step 1: Dense + Keyword retrieval
-        dense_results = self.dense_retrieve(query, top_k=retrieval_k)
+        # Step 1: Keyword (always) + Dense (only if enabled)
         keyword_results = self.keyword_retrieve(query, top_k=retrieval_k)
+        if USE_DENSE:
+            dense_results = self.dense_retrieve(query, top_k=retrieval_k)
+            dense_results = self._filter_superseded(dense_results)
+        else:
+            dense_results = []
 
         # Step 2: Filter superseded
-        dense_results = self._filter_superseded(dense_results)
         keyword_results = self._filter_superseded(keyword_results)
 
         # Step 3: RRF fusion
         fused = self.reciprocal_rank_fusion(dense_results, keyword_results)
+        if not fused:
+            fused = keyword_results  # BM25-only fallback
 
         # Step 3.5: Optional sector filter
         if sector and sector.lower() != "all":
@@ -132,9 +152,12 @@ class NiyamRetriever:
         retrieval_k = retrieval_k or RETRIEVAL_K
         rerank_top_k = rerank_top_k or RERANK_TOP_K
 
-        dense_results = self.dense_retrieve(query, top_k=retrieval_k)
         keyword_results = self.keyword_retrieve(query, top_k=retrieval_k)
-        dense_results = self._filter_superseded(dense_results)
+        if USE_DENSE:
+            dense_results = self.dense_retrieve(query, top_k=retrieval_k)
+            dense_results = self._filter_superseded(dense_results)
+        else:
+            dense_results = []
         keyword_results = self._filter_superseded(keyword_results)
         fused = self.reciprocal_rank_fusion(dense_results, keyword_results)
         reranked = self.rerank(query, fused, top_k=rerank_top_k)

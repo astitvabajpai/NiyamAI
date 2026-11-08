@@ -10,7 +10,6 @@ import re
 from pathlib import Path
 
 import pymupdf as fitz  # PyMuPDF
-from sentence_transformers import SentenceTransformer
 from rank_bm25 import BM25Okapi
 import faiss
 
@@ -139,8 +138,10 @@ def chunk_text(text: str, strategy: str = "section_aware", chunk_size: int = 400
     return chunk_section_aware(text, chunk_size, overlap)
 
 
-def process_pdfs(pdf_dir: Path) -> tuple[list, SentenceTransformer]:
+def process_pdfs(pdf_dir: Path) -> tuple[list, "SentenceTransformer"]:
     """Main ingestion: process all PDFs, return chunks and embedding model."""
+    from sentence_transformers import SentenceTransformer  # lazy import: keeps torch out of startup path
+
     print(f"Loading embedding model: {EMBEDDING_MODEL}")
     embed_model = SentenceTransformer(EMBEDDING_MODEL)
 
