@@ -1,0 +1,362 @@
+[
+  {
+    "question": "What are the KYC norms for opening a bank account in India?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What documents are required for KYC verification?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What is the KYC process for non-individual entities?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What are the periodic KYC update requirements for banks?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What is Video-based Customer Identification Process (V-CIP)?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What are the Aadhaar-based KYC requirements for bank accounts?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What are the simplified KYC norms for small accounts?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What is Central KYC Registry (CKYCRR) and how does it work?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What are the RBI guidelines for digital lending platforms?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What disclosures must digital lenders provide to borrowers?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What are the rules for Lending Service Providers (LSPs)?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What is a Key Fact Statement in digital lending?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What are the regulations for Equated Monthly Instalment (EMI) in digital loans?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What are the data privacy rules for digital lending apps?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What is the priority sector lending target for commercial banks?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What sub-targets exist within priority sector lending?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What categories are included under priority sector lending?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What is RIDF and how does it relate to priority sector lending shortfalls?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What is the priority sector lending target for agriculture?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What are the guidelines for lending to Micro, Small and Medium Enterprises (MSMEs)?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What are the RBI guidelines on Internet banking security?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What are the requirements for two-factor authentication in online banking?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What are the RBI rules on mobile banking services?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What are the transaction limits for mobile banking?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What are the RBI guidelines on UPI transactions?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the regulations for payment aggregators in India?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the security requirements for payment gateways?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the rules for pre-paid payment instruments (PPIs)?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the chargeback rules for digital payments?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the RBI guidelines on fraud risk management?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Fraud Risk Management"
+  },
+  {
+    "question": "What must banks do when they detect a fraud?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Fraud Risk Management"
+  },
+  {
+    "question": "What are the fraud reporting timelines under RBI regulations?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Fraud Risk Management"
+  },
+  {
+    "question": "What is the Early Warning System (EWS) for fraud detection?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Fraud Risk Management"
+  },
+  {
+    "question": "What are the RBI rules for customer liability in case of unauthorized transactions?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Fraud Risk Management"
+  },
+  {
+    "question": "What are the RBI rules on cyber security for banks?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Fraud Risk Management"
+  },
+  {
+    "question": "Can a bank charge a penalty for not maintaining minimum balance?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  },
+  {
+    "question": "What are the RBI grievance redressal requirements for banks?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  },
+  {
+    "question": "What is the Banking Ombudsman Scheme?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  },
+  {
+    "question": "What are the timelines for resolving customer complaints in banks?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  },
+  {
+    "question": "What are the RBI guidelines on bank account portability?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  },
+  {
+    "question": "What are the rules for nomination in bank accounts?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  },
+  {
+    "question": "What are the RBI guidelines on interest rates for savings accounts?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  },
+  {
+    "question": "What are the regulations for foreign exchange transactions for individuals?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What is the Liberalised Remittance Scheme (LRS)?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What are the RBI guidelines on NEFT and RTGS transactions?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the regulations for IMPS transactions?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the RBI norms for Non-Banking Financial Companies (NBFCs)?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What are the RBI rules for peer-to-peer (P2P) lending platforms?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What are the obligations of banks under the Prevention of Money Laundering Act?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What are the Suspicious Transaction Reporting (STR) requirements?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "KYC"
+  },
+  {
+    "question": "What is the annual percentage rate (APR) disclosure requirement for loans?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What are the cooling-off period rules in digital lending?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Lending"
+  },
+  {
+    "question": "What is the weaker sections lending sub-target?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What are the RBI guidelines on gold loans?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Priority Sector Lending"
+  },
+  {
+    "question": "What are the merchant discount rate (MDR) regulations?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the regulations for tokenization of card data?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What is the maximum transaction limit for UPI?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Payment"
+  },
+  {
+    "question": "What are the RBI norms for business correspondents?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What are the guidelines for setting up an IFSC-enabled account?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Digital Banking"
+  },
+  {
+    "question": "What are the financial literacy requirements for banks?",
+    "expected_chunk": null,
+    "expected_page": null,
+    "topic": "Customer Service"
+  }
+]
