@@ -28,13 +28,10 @@ ENV/
 # Environment variables
 .env
 
-# Data files (large, don't commit)
-data/chunks/
-data/bm25_index.pkl
+# Cache database
 data/cache.db
-data/*.json
 
-# Directories with PDFs (too large for git)
+# Raw PDFs directory (too large for git)
 Directories/
 
 # IDE
