@@ -1,0 +1,773 @@
+{
+  "config": "hybrid_rerank",
+  "total_questions": 60,
+  "recall@1": 0.35,
+  "recall@3": 0.383,
+  "recall@5": 0.417,
+  "per_topic": {
+    "KYC": {
+      "count": 10,
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0
+    },
+    "Digital Lending": {
+      "count": 10,
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0
+    },
+    "Priority Sector Lending": {
+      "count": 8,
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0
+    },
+    "Digital Banking": {
+      "count": 8,
+      "recall@1": 0.25,
+      "recall@3": 0.25,
+      "recall@5": 0.25
+    },
+    "Digital Payment": {
+      "count": 10,
+      "recall@1": 0.6,
+      "recall@3": 0.7,
+      "recall@5": 0.9
+    },
+    "Fraud Risk Management": {
+      "count": 6,
+      "recall@1": 0.5,
+      "recall@3": 0.667,
+      "recall@5": 0.667
+    },
+    "Customer Service": {
+      "count": 8,
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0
+    }
+  },
+  "details": [
+    {
+      "question": "What are the KYC norms for opening a bank account in India?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "200MD",
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "243MD"
+      ]
+    },
+    {
+      "question": "What documents are required for KYC verification?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "169MD",
+        "377MDC2C0B12BF5FA4716B1186CBAFBAEE6DC",
+        "316MDC827AC45BD1248DFB272637379D4128C"
+      ]
+    },
+    {
+      "question": "What is the KYC process for non-individual entities?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "377MDC2C0B12BF5FA4716B1186CBAFBAEE6DC",
+        "200MD",
+        "218MD"
+      ]
+    },
+    {
+      "question": "What are the periodic KYC update requirements for banks?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "169MD",
+        "316MDC827AC45BD1248DFB272637379D4128C"
+      ]
+    },
+    {
+      "question": "What is Video-based Customer Identification Process (V-CIP)?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "377MDC2C0B12BF5FA4716B1186CBAFBAEE6DC",
+        "335MDB36143CAC69041858F40094B961AD8D1",
+        "218MD"
+      ]
+    },
+    {
+      "question": "What are the Aadhaar-based KYC requirements for bank accounts?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "316MDC827AC45BD1248DFB272637379D4128C",
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "243MD"
+      ]
+    },
+    {
+      "question": "What are the simplified KYC norms for small accounts?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "169MD",
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "200MD"
+      ]
+    },
+    {
+      "question": "What is Central KYC Registry (CKYCRR) and how does it work?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "200MD",
+        "361MD1E2F8EA063454AD5AFA1D02A1BA5ACA7",
+        "169MD"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines for digital lending platforms?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "380MD",
+        "381MD"
+      ]
+    },
+    {
+      "question": "What disclosures must digital lenders provide to borrowers?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "420MD29384D707EBB4C938067734D3B24D278",
+        "462MD7323FF342D124FAF9BC3B3F7E4F837A5",
+        "385MDE9EEBCE5D5EA40C5AD9FD122507E94F8"
+      ]
+    },
+    {
+      "question": "What are the rules for Lending Service Providers (LSPs)?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "243MD",
+        "412MD5B6CA712E156413BACDEA9DD5CF5D1EF",
+        "439MD31E8DC47A27C4FE6B43005D22E4F6CB7"
+      ]
+    },
+    {
+      "question": "What is a Key Fact Statement in digital lending?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "MD123C0C6F7FF70E34F3DA5623B9E72AB3181",
+        "381MD",
+        "384MD"
+      ]
+    },
+    {
+      "question": "What are the regulations for Equated Monthly Instalment (EMI) in digital loans?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "396MDD002E435ECA145509929FC3ACBCFD0E9",
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "411MD1918998D1AD74F159D57664FB10E053F"
+      ]
+    },
+    {
+      "question": "What are the data privacy rules for digital lending apps?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "420MD29384D707EBB4C938067734D3B24D278",
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "429MD335484C7D27C4AC58720D636CA735A25"
+      ]
+    },
+    {
+      "question": "What is the priority sector lending target for commercial banks?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47"
+      ]
+    },
+    {
+      "question": "What sub-targets exist within priority sector lending?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47"
+      ]
+    },
+    {
+      "question": "What categories are included under priority sector lending?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47"
+      ]
+    },
+    {
+      "question": "What is RIDF and how does it relate to priority sector lending shortfalls?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909"
+      ]
+    },
+    {
+      "question": "What is the priority sector lending target for agriculture?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47"
+      ]
+    },
+    {
+      "question": "What are the guidelines for lending to Micro, Small and Medium Enterprises (MSMEs)?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines on Internet banking security?",
+      "topic": "Digital Banking",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "420MD29384D707EBB4C938067734D3B24D278"
+      ]
+    },
+    {
+      "question": "What are the requirements for two-factor authentication in online banking?",
+      "topic": "Digital Banking",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "NT79258FF36ECA8F4886B3B01F55D166C2B2"
+      ]
+    },
+    {
+      "question": "What are the RBI rules on mobile banking services?",
+      "topic": "Digital Banking",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "411MD1918998D1AD74F159D57664FB10E053F"
+      ]
+    },
+    {
+      "question": "What are the transaction limits for mobile banking?",
+      "topic": "Digital Banking",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "380MD",
+        "383MD",
+        "381MD"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines on UPI transactions?",
+      "topic": "Digital Payment",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "169MD",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909"
+      ]
+    },
+    {
+      "question": "What are the regulations for payment aggregators in India?",
+      "topic": "Digital Payment",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "MD123C0C6F7FF70E34F3DA5623B9E72AB3181",
+        "NT79258FF36ECA8F4886B3B01F55D166C2B2",
+        "429MD335484C7D27C4AC58720D636CA735A25"
+      ]
+    },
+    {
+      "question": "What are the security requirements for payment gateways?",
+      "topic": "Digital Payment",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "462MD7323FF342D124FAF9BC3B3F7E4F837A5",
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "420MD29384D707EBB4C938067734D3B24D278"
+      ]
+    },
+    {
+      "question": "What are the rules for pre-paid payment instruments (PPIs)?",
+      "topic": "Digital Payment",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "243MD",
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "291MDE108E59AC43D4C13B2D06598B296C877"
+      ]
+    },
+    {
+      "question": "What are the chargeback rules for digital payments?",
+      "topic": "Digital Payment",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "429MD335484C7D27C4AC58720D636CA735A25"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines on fraud risk management?",
+      "topic": "Fraud Risk Management",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "430MD8AFE9055BACE46968BC6E8CB3112471B",
+        "430MD8AFE9055BACE46968BC6E8CB3112471B",
+        "457MDAC203EBBDF604A81958E02BB2C4BB1B1 (1)"
+      ]
+    },
+    {
+      "question": "What must banks do when they detect a fraud?",
+      "topic": "Fraud Risk Management",
+      "recall@1": 0.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "420MD29384D707EBB4C938067734D3B24D278",
+        "439MD31E8DC47A27C4FE6B43005D22E4F6CB7",
+        "411MD1918998D1AD74F159D57664FB10E053F"
+      ]
+    },
+    {
+      "question": "What are the fraud reporting timelines under RBI regulations?",
+      "topic": "Fraud Risk Management",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "439MD31E8DC47A27C4FE6B43005D22E4F6CB7",
+        "412MD5B6CA712E156413BACDEA9DD5CF5D1EF",
+        "430MD8AFE9055BACE46968BC6E8CB3112471B"
+      ]
+    },
+    {
+      "question": "What is the Early Warning System (EWS) for fraud detection?",
+      "topic": "Fraud Risk Management",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "439MD31E8DC47A27C4FE6B43005D22E4F6CB7",
+        "430MD8AFE9055BACE46968BC6E8CB3112471B",
+        "430MD8AFE9055BACE46968BC6E8CB3112471B"
+      ]
+    },
+    {
+      "question": "What are the RBI rules for customer liability in case of unauthorized transactions?",
+      "topic": "Fraud Risk Management",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "420MD29384D707EBB4C938067734D3B24D278"
+      ]
+    },
+    {
+      "question": "What are the RBI rules on cyber security for banks?",
+      "topic": "Fraud Risk Management",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "MD123C0C6F7FF70E34F3DA5623B9E72AB3181",
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "MD123C0C6F7FF70E34F3DA5623B9E72AB3181"
+      ]
+    },
+    {
+      "question": "Can a bank charge a penalty for not maintaining minimum balance?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "316MDC827AC45BD1248DFB272637379D4128C",
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "169MD"
+      ]
+    },
+    {
+      "question": "What are the RBI grievance redressal requirements for banks?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "396MDD002E435ECA145509929FC3ACBCFD0E9"
+      ]
+    },
+    {
+      "question": "What is the Banking Ombudsman Scheme?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "439MD31E8DC47A27C4FE6B43005D22E4F6CB7",
+        "169MD",
+        "429MD335484C7D27C4AC58720D636CA735A25"
+      ]
+    },
+    {
+      "question": "What are the timelines for resolving customer complaints in banks?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "429MD335484C7D27C4AC58720D636CA735A25",
+        "411MD1918998D1AD74F159D57664FB10E053F",
+        "420MD29384D707EBB4C938067734D3B24D278"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines on bank account portability?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "243MD",
+        "291MDE108E59AC43D4C13B2D06598B296C877"
+      ]
+    },
+    {
+      "question": "What are the rules for nomination in bank accounts?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "169MD",
+        "200MD",
+        "243MD"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines on interest rates for savings accounts?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "243MD",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909"
+      ]
+    },
+    {
+      "question": "What are the regulations for foreign exchange transactions for individuals?",
+      "topic": "Digital Banking",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "377MDC2C0B12BF5FA4716B1186CBAFBAEE6DC",
+        "316MDC827AC45BD1248DFB272637379D4128C",
+        "316MDC827AC45BD1248DFB272637379D4128C"
+      ]
+    },
+    {
+      "question": "What is the Liberalised Remittance Scheme (LRS)?",
+      "topic": "Digital Banking",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "243MD",
+        "266MDB4BD80DE4B394A50808E81ACC3A2358E",
+        "243MD"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines on NEFT and RTGS transactions?",
+      "topic": "Digital Payment",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "200MD",
+        "243MD",
+        "361MD1E2F8EA063454AD5AFA1D02A1BA5ACA7"
+      ]
+    },
+    {
+      "question": "What are the regulations for IMPS transactions?",
+      "topic": "Digital Payment",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "200MD",
+        "243MD",
+        "169MD"
+      ]
+    },
+    {
+      "question": "What are the RBI norms for Non-Banking Financial Companies (NBFCs)?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "361MD1E2F8EA063454AD5AFA1D02A1BA5ACA7",
+        "361MD1E2F8EA063454AD5AFA1D02A1BA5ACA7",
+        "316MDC827AC45BD1248DFB272637379D4128C"
+      ]
+    },
+    {
+      "question": "What are the RBI rules for peer-to-peer (P2P) lending platforms?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47"
+      ]
+    },
+    {
+      "question": "What are the obligations of banks under the Prevention of Money Laundering Act?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "335MDB36143CAC69041858F40094B961AD8D1",
+        "377MDC2C0B12BF5FA4716B1186CBAFBAEE6DC",
+        "291MDE108E59AC43D4C13B2D06598B296C877"
+      ]
+    },
+    {
+      "question": "What are the Suspicious Transaction Reporting (STR) requirements?",
+      "topic": "KYC",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "200MD",
+        "243MD",
+        "169MD"
+      ]
+    },
+    {
+      "question": "What is the annual percentage rate (APR) disclosure requirement for loans?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909"
+      ]
+    },
+    {
+      "question": "What are the cooling-off period rules in digital lending?",
+      "topic": "Digital Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "412MD5B6CA712E156413BACDEA9DD5CF5D1EF",
+        "169MD",
+        "420MD29384D707EBB4C938067734D3B24D278"
+      ]
+    },
+    {
+      "question": "What is the weaker sections lending sub-target?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909"
+      ]
+    },
+    {
+      "question": "What are the RBI guidelines on gold loans?",
+      "topic": "Priority Sector Lending",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909"
+      ]
+    },
+    {
+      "question": "What are the merchant discount rate (MDR) regulations?",
+      "topic": "Digital Payment",
+      "recall@1": 0.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "128MD66C4DDCB167C4DC9A5BD913570CB3D47",
+        "MDPSL803EE903174E4C85AFA14C335A5B0909",
+        "411MD1918998D1AD74F159D57664FB10E053F"
+      ]
+    },
+    {
+      "question": "What are the regulations for tokenization of card data?",
+      "topic": "Digital Payment",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "NT79258FF36ECA8F4886B3B01F55D166C2B2",
+        "438MDD999C3E155F8479AA7075B10FAF82870",
+        "420MD29384D707EBB4C938067734D3B24D278"
+      ]
+    },
+    {
+      "question": "What is the maximum transaction limit for UPI?",
+      "topic": "Digital Payment",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "420MD29384D707EBB4C938067734D3B24D278",
+        "380MD",
+        "396MDD002E435ECA145509929FC3ACBCFD0E9"
+      ]
+    },
+    {
+      "question": "What are the RBI norms for business correspondents?",
+      "topic": "Digital Banking",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "316MDC827AC45BD1248DFB272637379D4128C",
+        "335MDB36143CAC69041858F40094B961AD8D1",
+        "169MD"
+      ]
+    },
+    {
+      "question": "What are the guidelines for setting up an IFSC-enabled account?",
+      "topic": "Digital Banking",
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "top_docs": [
+        "381MD",
+        "169MD",
+        "411MD1918998D1AD74F159D57664FB10E053F"
+      ]
+    },
+    {
+      "question": "What are the financial literacy requirements for banks?",
+      "topic": "Customer Service",
+      "recall@1": 0.0,
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "top_docs": [
+        "380MD",
+        "382MD",
+        "383MD"
+      ]
+    }
+  ]
+}
