@@ -48,9 +48,9 @@ class NiyamRetriever:
             self.bm25 = pickle.load(f)
         print("  BM25 index loaded")
 
-        # Load reranker
-        self.reranker = CrossEncoder(RERANKER_MODEL)
-        print(f"  Reranker: {RERANKER_MODEL}")
+        # Load reranker (commented out for Render free-tier <512MB limits; skips cross-encoder ~92MB)
+        self.reranker = None
+        print("  Reranker: SKIPPED (save ~92MB for low-memory deploy)")
 
         self.embed_model = SentenceTransformer(EMBEDDING_MODEL)
         self._loaded = True
