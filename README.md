@@ -25,10 +25,10 @@ Dense retrieval (FAISS) + Keyword retrieval (BM25)
 | Layer | Technology |
 |-------|-----------|
 | Backend | FastAPI + Uvicorn |
-| Embedding | `BAAI/bge-small-en-v1.5` (local) |
-| Vector DB | FAISS (local) |
+| Embedding | `BAAI/bge-small-en-v1.5` (optional — disabled on low-memory deployments) |
+| Vector DB | FAISS (local) — skipped when `USE_DENSE=0` |
 | Keyword Search | BM25 (rank_bm25) |
-| Reranker | `cross-encoder/ms-marco-MiniLM-L-6-v2` |
+| Reranker | `cross-encoder/ms-marco-MiniLM-L-6-v2` — skipped when `USE_DENSE=0` |
 | LLM | Groq — Llama 3.3 70B |
 | PDF Parsing | PyMuPDF |
 | Frontend | Vanilla HTML/CSS/JS (dark glassmorphism) |
@@ -62,6 +62,7 @@ Then open http://localhost:8000
 | `GROQ_MODEL` | `llama-3.3-70b-versatile` | Groq model name |
 | `EMBEDDING_MODEL` | `BAAI/bge-small-en-v1.5` | Local embedding model |
 | `RERANKER_MODEL` | `cross-encoder/ms-marco-MiniLM-L-6-v2` | Local reranker |
+| `USE_DENSE` | `0` | Set `1` to enable FAISS+reranker (requires >512MB RAM) |
 | `PDF_DIR` | `./Directories` | Source PDF folder |
 | `CHUNKS_DIR` | `./data/chunks` | Where indexes are stored |
 | `BM25_INDEX_PATH` | `./data/bm25_index.pkl` | BM25 index file |
@@ -134,10 +135,11 @@ NiyamAI/
 
 ### Render / Railway
 1. Connect GitHub repo
-2. Set env vars (especially `GROQ_API_KEY`)
+2. Set env vars (`GROQ_API_KEY`, optionally `USE_DENSE=1` for full hybrid retrieval on higher-tier instances)
 3. Start command: `uvicorn src.api:app --host 0.0.0.0 --port $PORT`
+4. First boot automatically runs ingestion if `data/chunks/metadata.json` is missing
 
-> **Note:** Run ingestion locally first and commit the generated `data/` files, or add an ingestion step to your build command.
+> **Note:** Pre-built `data/` indexes are committed to the repo. Set `USE_DENSE=1` only on instances with ≥1GB RAM — default BM25-only mode uses ~180 MB.
 
 ### Docker
 
