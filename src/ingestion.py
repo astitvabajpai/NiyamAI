@@ -17,12 +17,12 @@ import faiss
 from dotenv import load_dotenv
 load_dotenv()
 
-PDF_DIR = Path(os.getenv("PDF_DIR", "./Directories"))
-CHUNKS_DIR = Path(os.getenv("CHUNKS_DIR", "./data/chunks"))
-BM25_INDEX_PATH = Path(os.getenv("BM25_INDEX_PATH", "./data/bm25_index.pkl"))
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-small-en-v1.5")
-RERANKER_MODEL = os.getenv("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
-CHUNKING_STRATEGY = os.getenv("CHUNKING_STRATEGY", "section_aware")
+PDF_DIR = Path(os.getenv("PDF_DIR", "./Directories").strip())
+CHUNKS_DIR = Path(os.getenv("CHUNKS_DIR", "./data/chunks").strip())
+BM25_INDEX_PATH = Path(os.getenv("BM25_INDEX_PATH", "./data/bm25_index.pkl").strip())
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-small-en-v1.5").strip()
+RERANKER_MODEL = os.getenv("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2").strip()
+CHUNKING_STRATEGY = os.getenv("CHUNKING_STRATEGY", "section_aware").strip()
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "400"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "80"))
 
