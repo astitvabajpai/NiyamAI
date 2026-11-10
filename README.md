@@ -6,15 +6,15 @@
 
 NiyamAI is a RAG (Retrieval-Augmented Generation) system — it does not train a model. It uses pre-trained models for retrieval and a hosted LLM for generation.
 
-![NiyamAI Pipeline](docs/images/pipeline.svg)
+![NiyamAI Pipeline](https://raw.githubusercontent.com/astitvabajpai/NiyamAI/main/docs/images/pipeline.svg)
 
 ### Retrieval Flow
 
-![Retrieval Pipeline](docs/images/retrieval.svg)
+![Retrieval Pipeline](https://raw.githubusercontent.com/astitvabajpai/NiyamAI/main/docs/images/retrieval.svg)
 
 ## Tech Stack
 
-![Tech Stack](docs/images/techstack.svg)
+![Tech Stack](https://raw.githubusercontent.com/astitvabajpai/NiyamAI/main/docs/images/techstack.svg)
 
 | Layer | Technology |
 |---|---|
