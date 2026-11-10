@@ -18,8 +18,8 @@ RUN bash scripts/ingest.sh
 RUN chown -R appuser:appuser /app
 USER appuser
 
-# Fly.io sets PORT=8080 by default. We expose 8080 to match.
-EXPOSE 8080
+# HuggingFace Spaces requires port 7860
+EXPOSE 7860
 
-# Always use $PORT — Fly injects it at runtime (default 8080 if not set)
-CMD ["sh", "-c", "uvicorn src.api:app --host 0.0.0.0 --port ${PORT:-8080}"]
+# PORT env var: HF sets it to 7860, Fly sets it to 8080, fallback to 7860
+CMD ["sh", "-c", "uvicorn src.api:app --host 0.0.0.0 --port ${PORT:-7860}"]

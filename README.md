@@ -1,3 +1,13 @@
+---
+title: NiyamAI
+emoji: ⚖️
+colorFrom: green
+colorTo: gray
+sdk: docker
+app_port: 7860
+pinned: true
+---
+
 # NiyamAI
 
 **Question-answering system over RBI regulations.** Ask plain-English questions and get precise, structured answers with citations to exact documents and pages.
