@@ -19,7 +19,7 @@ from pydantic import BaseModel
 from src.retrieval import get_retriever
 from src.generation import generate_answer
 from src.ui import HTMLPage
-from src.ingestion import METADATA_PATH, PDF_DIR
+from src.ingestion import METADATA_PATH, PDF_DIR, BM25_INDEX_PATH
 
 app = FastAPI(title="NiyamAI - RBI Regulation QA")
 
@@ -209,8 +209,8 @@ def _check_rate(client_ip: str) -> bool:
 
 # ── Startup ───────────────────────────────────────────────────────────────────
 def _ensure_index():
-    """Build index from PDFs if metadata.json missing (first-boot scenario)."""
-    if METADATA_PATH.exists():
+    """Build index from PDFs if indexes are missing (first-boot scenario on HF/Render)."""
+    if METADATA_PATH.exists() and BM25_INDEX_PATH.exists():
         return
     print("Index not found. Running ingestion...")
     from src.ingestion import process_pdfs
