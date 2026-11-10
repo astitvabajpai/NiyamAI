@@ -9,12 +9,49 @@ services:
     startCommand: uvicorn src.api:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.13.0
+        value: "3.13.0"
+
+      # ── LLM ──────────────────────────────────────────────────────────────
+      # Set GROQ_API_KEY in the Render dashboard (Dashboard → Environment → Add).
+      # Never commit the actual key.
       - key: GROQ_API_KEY
         sync: false
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+
+      # ── Retrieval ─────────────────────────────────────────────────────────
+      # USE_DENSE=0 → BM25-only (~180 MB RAM, works on free tier).
+      # Set USE_DENSE=1 only on a paid instance with ≥512 MB RAM.
+      - key: USE_DENSE
+        value: "0"
       - key: EMBEDDING_MODEL
         value: BAAI/bge-small-en-v1.5
       - key: RERANKER_MODEL
         value: cross-encoder/ms-marco-MiniLM-L-6-v2
-      - key: PORT
-        value: 8000
+      - key: RETRIEVAL_K
+        value: "20"
+      - key: RERANK_TOP_K
+        value: "5"
+
+      # ── Ingestion ─────────────────────────────────────────────────────────
+      - key: PDF_DIR
+        value: ./Directories
+      - key: CHUNKS_DIR
+        value: ./data/chunks
+      - key: BM25_INDEX_PATH
+        value: ./data/bm25_index.pkl
+      - key: CHUNKING_STRATEGY
+        value: section_aware
+      - key: CHUNK_SIZE
+        value: "400"
+      - key: CHUNK_OVERLAP
+        value: "80"
+
+      # ── Server ────────────────────────────────────────────────────────────
+      # PORT is injected by Render automatically; no need to set it here.
+      - key: API_HOST
+        value: "0.0.0.0"
+
+      # ── Evaluation ────────────────────────────────────────────────────────
+      - key: EVAL_DATASET_PATH
+        value: ./data/eval_set.json

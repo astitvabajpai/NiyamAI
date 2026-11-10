@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-FALLBACK_MODELS = ["qwen/qwen3.8-27b", "openai/gpt-oss-120b", "openai/gpt-oss-20b"]
+# Valid Groq model IDs as fallbacks (in order of preference)
+FALLBACK_MODELS = ["llama-3.3-70b-versatile", "llama3-70b-8192", "mixtral-8x7b-32768", "llama3-8b-8192"]
 
 SYSTEM_PROMPT = """You are NiyamAI, a specialized regulatory intelligence AI for Reserve Bank of India (RBI) notifications, master directions, and circulars.
 
@@ -42,7 +43,7 @@ CRITICAL RULES:
 def generate_answer(query: str, context_chunks: list[dict], stream: bool = True, history: list[dict] = None):
     """Generate an answer from retrieved context, optionally streaming."""
     client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-    primary_model = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
+    primary_model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
     # Build rich context blocks with document, section, and page metadata
     context_blocks = []

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 360" width="780" height="360" font-family="'Segoe UI', Inter, system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="780" height="360" fill="#F9FAFC" rx="12"/>
+
+  <!-- Title -->
+  <text x="390" y="36" text-anchor="middle" font-size="17" font-weight="700" fill="#0F172A" letter-spacing="-0.5">Retrieval Pipeline</text>
+  <line x1="140" y1="46" x2="640" y2="46" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Query input -->
+  <rect x="280" y="60" width="220" height="48" rx="6" fill="#0F172A"/>
+  <text x="390" y="80" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">User Query</text>
+  <text x="390" y="97" text-anchor="middle" font-size="10" fill="#94A3B8">+ Acronym Expansion</text>
+
+  <!-- Fork arrows -->
+  <line x1="310" y1="108" x2="180" y2="148" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="178,150 180,140 188,147" fill="#94A3B8"/>
+  <line x1="470" y1="108" x2="600" y2="148" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="602,150 594,147 602,140" fill="#94A3B8"/>
+
+  <!-- BM25 box -->
+  <rect x="60" y="150" width="240" height="52" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="180" y="172" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">🔑 BM25 Keyword</text>
+  <text x="180" y="190" text-anchor="middle" font-size="10" fill="#64748B">Tokenised term frequency scoring</text>
+
+  <!-- FAISS box -->
+  <rect x="480" y="150" width="240" height="52" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="600" y="172" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">🧲 FAISS Dense</text>
+  <text x="600" y="190" text-anchor="middle" font-size="10" fill="#64748B">BGE-small cosine similarity</text>
+
+  <!-- USE_DENSE label on FAISS -->
+  <rect x="594" y="148" width="110" height="16" rx="3" fill="#E2E8F0"/>
+  <text x="649" y="159" text-anchor="middle" font-size="9" fill="#475569">USE_DENSE=1 only</text>
+
+  <!-- Merge arrows -->
+  <line x1="180" y1="202" x2="340" y2="242" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="342,244 334,237 342,235" fill="#94A3B8"/>
+  <line x1="600" y1="202" x2="440" y2="242" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="438,244 438,235 446,237" fill="#94A3B8"/>
+
+  <!-- RRF box -->
+  <rect x="250" y="245" width="280" height="48" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="390" y="265" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">⚖️ Reciprocal Rank Fusion</text>
+  <text x="390" y="282" text-anchor="middle" font-size="10" fill="#64748B">score = Σ 1 / (rank + k)  for each list</text>
+
+  <!-- Arrow down -->
+  <line x1="390" y1="293" x2="390" y2="313" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="390,315 385,307 395,307" fill="#94A3B8"/>
+
+  <!-- Rerank + dedup box -->
+  <rect x="250" y="317" width="280" height="28" rx="6" fill="#2C3E1A"/>
+  <text x="390" y="336" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">🎯 Rerank (cross-encoder) · Dedup (doc+page)</text>
+
+  <!-- Top-K note -->
+  <text x="390" y="358" text-anchor="middle" font-size="10" fill="#94A3B8">Returns top-K chunks with full metadata · sector filter applied before reranking</text>
+</svg>

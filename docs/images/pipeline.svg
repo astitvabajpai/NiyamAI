@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" width="860" height="520" font-family="'Segoe UI', Inter, system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="860" height="520" fill="#F9FAFC" rx="12"/>
+
+  <!-- Title -->
+  <text x="430" y="40" text-anchor="middle" font-size="18" font-weight="700" fill="#0F172A" letter-spacing="-0.5">NiyamAI — RAG Pipeline</text>
+  <line x1="180" y1="50" x2="680" y2="50" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- ══ INGESTION LANE ══ -->
+  <rect x="24" y="68" width="110" height="22" rx="3" fill="#E2E8F0"/>
+  <text x="79" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#475569" letter-spacing="0.5">INGESTION</text>
+
+  <!-- PDF Box -->
+  <rect x="24" y="100" width="160" height="56" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="104" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">📄 PDF Documents</text>
+  <text x="104" y="142" text-anchor="middle" font-size="10" fill="#64748B">33 RBI circulars &amp; directions</text>
+
+  <!-- Arrow down -->
+  <line x1="104" y1="156" x2="104" y2="178" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="104,180 99,172 109,172" fill="#94A3B8"/>
+
+  <!-- Parse + Chunk -->
+  <rect x="24" y="182" width="160" height="56" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="104" y="206" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">⚙️ Parse &amp; Chunk</text>
+  <text x="104" y="222" text-anchor="middle" font-size="10" fill="#64748B">Section-aware or fixed-size</text>
+
+  <!-- Arrow down -->
+  <line x1="104" y1="238" x2="104" y2="260" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="104,262 99,254 109,254" fill="#94A3B8"/>
+
+  <!-- Embed + Index -->
+  <rect x="24" y="264" width="160" height="56" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="104" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">🗄 Embed &amp; Index</text>
+  <text x="104" y="302" text-anchor="middle" font-size="10" fill="#64748B">FAISS vectors + BM25 index</text>
+
+  <!-- ══ DIVIDER ══ -->
+  <line x1="210" y1="78" x2="210" y2="450" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- ══ QUERY LANE ══ -->
+  <rect x="220" y="68" width="90" height="22" rx="3" fill="#E2E8F0"/>
+  <text x="265" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#475569" letter-spacing="0.5">QUERY</text>
+
+  <!-- User Query -->
+  <rect x="220" y="100" width="160" height="56" rx="6" fill="#0F172A" stroke="#0F172A" stroke-width="1.5"/>
+  <text x="300" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">💬 User Query</text>
+  <text x="300" y="142" text-anchor="middle" font-size="10" fill="#94A3B8">Plain-English question</text>
+
+  <!-- Arrow -->
+  <line x1="300" y1="156" x2="300" y2="178" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="300,180 295,172 305,172" fill="#94A3B8"/>
+
+  <!-- Acronym Expand -->
+  <rect x="220" y="182" width="160" height="56" rx="6" fill="#FFFFFF" stroke="#5A6D34" stroke-width="1.5"/>
+  <text x="300" y="206" text-anchor="middle" font-size="13" font-weight="600" fill="#2C3E1A">🔤 Acronym Expand</text>
+  <text x="300" y="222" text-anchor="middle" font-size="10" fill="#5A6D34">KYC → know your customer</text>
+
+  <!-- Arrow -->
+  <line x1="300" y1="238" x2="300" y2="260" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="300,262 295,254 305,254" fill="#94A3B8"/>
+
+  <!-- Retrieval fork -->
+  <rect x="220" y="264" width="160" height="56" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="300" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">🔍 Dual Retrieval</text>
+  <text x="300" y="302" text-anchor="middle" font-size="10" fill="#64748B">FAISS (dense) + BM25 (keyword)</text>
+
+  <!-- Arrow -->
+  <line x1="300" y1="320" x2="300" y2="342" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="300,344 295,336 305,336" fill="#94A3B8"/>
+
+  <!-- RRF -->
+  <rect x="220" y="346" width="160" height="46" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="300" y="366" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">⚖️ RRF Fusion</text>
+  <text x="300" y="382" text-anchor="middle" font-size="10" fill="#64748B">Reciprocal Rank Fusion</text>
+
+  <!-- Arrow -->
+  <line x1="300" y1="392" x2="300" y2="414" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="300,416 295,408 305,408" fill="#94A3B8"/>
+
+  <!-- Rerank -->
+  <rect x="220" y="418" width="160" height="46" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="300" y="438" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">🎯 Rerank + Dedup</text>
+  <text x="300" y="454" text-anchor="middle" font-size="10" fill="#64748B">Cross-encoder · no duplicate pages</text>
+
+  <!-- ══ GENERATION LANE ══ -->
+  <rect x="415" y="68" width="110" height="22" rx="3" fill="#E2E8F0"/>
+  <text x="470" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#475569" letter-spacing="0.5">GENERATION</text>
+
+  <!-- Arrow from rerank to LLM -->
+  <line x1="380" y1="441" x2="452" y2="441" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="454,441 446,436 446,446" fill="#94A3B8"/>
+  <line x1="454" y1="441" x2="454" y2="264" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="454,262 449,270 459,270" fill="#94A3B8"/>
+
+  <!-- Context chunks -->
+  <rect x="414" y="100" width="180" height="56" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="504" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">📚 Context Chunks</text>
+  <text x="504" y="142" text-anchor="middle" font-size="10" fill="#64748B">Top-K passages with metadata</text>
+
+  <!-- Arrow -->
+  <line x1="504" y1="156" x2="504" y2="178" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="504,180 499,172 509,172" fill="#94A3B8"/>
+
+  <!-- Groq LLM -->
+  <rect x="414" y="182" width="180" height="56" rx="6" fill="#2C3E1A" stroke="#2C3E1A" stroke-width="1.5"/>
+  <text x="504" y="206" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">🤖 Groq LLM</text>
+  <text x="504" y="222" text-anchor="middle" font-size="10" fill="#A7B58A">llama-3.3-70b-versatile</text>
+
+  <!-- Arrow -->
+  <line x1="504" y1="238" x2="504" y2="260" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="504,262 499,254 509,254" fill="#94A3B8"/>
+
+  <!-- Streaming SSE -->
+  <rect x="414" y="264" width="180" height="56" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="504" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#0F172A">📡 SSE Stream</text>
+  <text x="504" y="302" text-anchor="middle" font-size="10" fill="#64748B">Tokens streamed live to browser</text>
+
+  <!-- ══ OUTPUT LANE ══ -->
+  <rect x="625" y="68" width="90" height="22" rx="3" fill="#E2E8F0"/>
+  <text x="670" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#475569" letter-spacing="0.5">OUTPUT</text>
+
+  <!-- Arrow -->
+  <line x1="594" y1="292" x2="624" y2="292" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="626,292 618,287 618,297" fill="#94A3B8"/>
+
+  <!-- Answer -->
+  <rect x="626" y="264" width="196" height="56" rx="6" fill="#FFFFFF" stroke="#5A6D34" stroke-width="1.5"/>
+  <text x="724" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#2C3E1A">✅ Structured Answer</text>
+  <text x="724" y="302" text-anchor="middle" font-size="10" fill="#5A6D34">Summary · provisions · scope</text>
+
+  <!-- Arrow -->
+  <line x1="724" y1="320" x2="724" y2="342" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="724,344 719,336 729,336" fill="#94A3B8"/>
+
+  <!-- Citations -->
+  <rect x="626" y="346" width="196" height="56" rx="6" fill="#FFFFFF" stroke="#5A6D34" stroke-width="1.5"/>
+  <text x="724" y="370" text-anchor="middle" font-size="13" font-weight="600" fill="#2C3E1A">🔖 Citations</text>
+  <text x="724" y="386" text-anchor="middle" font-size="10" fill="#5A6D34">Document · page · PDF deep-link</text>
+
+  <!-- Cache note -->
+  <rect x="626" y="418" width="196" height="46" rx="6" fill="#F0F4F1" stroke="#5A6D34" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="724" y="438" text-anchor="middle" font-size="12" font-weight="600" fill="#2C3E1A">💾 SQLite Cache</text>
+  <text x="724" y="454" text-anchor="middle" font-size="10" fill="#5A6D34">24hr TTL · survives restarts</text>
+
+  <!-- Footer note -->
+  <text x="430" y="498" text-anchor="middle" font-size="10" fill="#94A3B8">USE_DENSE=0 (default): BM25-only · ~180 MB RAM &nbsp;|&nbsp; USE_DENSE=1: Full hybrid · ≥512 MB RAM</text>
+</svg>
