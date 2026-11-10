@@ -73,10 +73,10 @@ SECTOR_NAME_MAP = {
 
 from src.ingestion import METADATA_PATH, FAISS_PATH, BM25_INDEX_PATH, EMBEDDING_MODEL, RERANKER_MODEL
 
-USE_DENSE = os.getenv("USE_DENSE", "0") == "1"
+USE_DENSE = os.getenv("USE_DENSE", "0").strip() == "1"
 
-RETRIEVAL_K = int(os.getenv("RETRIEVAL_K", "20"))
-RERANK_TOP_K = int(os.getenv("RERANK_TOP_K", "5"))
+RETRIEVAL_K = int(os.getenv("RETRIEVAL_K", "20").strip())
+RERANK_TOP_K = int(os.getenv("RERANK_TOP_K", "5").strip())
 
 
 class NiyamRetriever:
@@ -91,6 +91,9 @@ class NiyamRetriever:
     def load(self):
         """Load all indexes and metadata."""
         print("Loading NiyamAI retriever...")
+        print(f"  BM25_INDEX_PATH resolved: {BM25_INDEX_PATH.resolve()}")
+        print(f"  METADATA_PATH resolved:   {METADATA_PATH.resolve()}")
+        print(f"  BM25 exists: {BM25_INDEX_PATH.exists()}, Metadata exists: {METADATA_PATH.exists()}")
 
         # Load metadata
         with open(METADATA_PATH, "r", encoding="utf-8") as f:
