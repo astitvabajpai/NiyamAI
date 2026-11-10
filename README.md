@@ -171,21 +171,34 @@ NiyamAI/
 
 ## Deployment
 
-### Render / Railway
+### HuggingFace Spaces (recommended — always-on, free)
 
-1. Connect your GitHub repo
-2. Set env vars: `GROQ_API_KEY` (required), `USE_DENSE=1` only on instances with ≥1 GB RAM
-3. Start command: `uvicorn src.api:app --host 0.0.0.0 --port $PORT`
-4. First boot auto-runs ingestion if `data/chunks/metadata.json` is missing
+1. Create a new Space at [huggingface.co/new-space](https://huggingface.co/new-space) — SDK: `Docker`
+2. Add HF as a git remote and push:
+   ```bash
+   git remote add hf https://huggingface.co/spaces/YOUR_HF_USERNAME/NiyamAI
+   git push hf main
+   ```
+3. In your Space → **Settings → Variables and Secrets**, add:
+   - `GROQ_API_KEY` — your Groq API key (the only required secret)
+4. HF builds the Docker image automatically. App will be live at `https://YOUR_HF_USERNAME-niyamai.hf.space`
 
-> Pre-built indexes in `data/` are committed to the repo. Default BM25-only mode (`USE_DENSE=0`) uses ~180 MB RAM.
+> HF CPU spaces give 16 GB RAM — enough to run `USE_DENSE=1` for full hybrid retrieval.
 
-### Docker
+### Docker (local or any VPS)
 
 ```bash
 docker build -t niyamai .
-docker run -p 8000:8000 --env-file .env niyamai
+docker run -p 7860:7860 --env-file .env niyamai
 ```
+
+### Render / Railway
+
+1. Connect your GitHub repo
+2. Set env vars: `GROQ_API_KEY` (required)
+3. Start command: `uvicorn src.api:app --host 0.0.0.0 --port $PORT`
+
+> Pre-built indexes in `data/` are committed to the repo. Default BM25-only mode (`USE_DENSE=0`) uses ~180 MB RAM.
 
 ## Features
 
