@@ -6,15 +6,82 @@
 
 NiyamAI is a RAG (Retrieval-Augmented Generation) system — it does not train a model. It uses pre-trained models for retrieval and a hosted LLM for generation.
 
-![NiyamAI Pipeline](https://raw.githubusercontent.com/astitvabajpai/NiyamAI/main/docs/images/pipeline.svg)
+```mermaid
+flowchart TD
+    A([📄 PDF Documents\n33 RBI circulars & directions]) --> B[Parse & Clean\nPyMuPDF]
+    B --> C[Chunk Text\nSection-aware or fixed-size]
+    C --> D[Embed\nBAAI/bge-small-en-v1.5]
+    D --> E[(FAISS Index\nDense vectors)]
+    C --> F[(BM25 Index\nKeyword tokens)]
 
-### Retrieval Flow
+    G([💬 User Query]) --> H[Acronym Expansion\nKYC → know your customer]
+    H --> I[BM25 Retrieval\nalways on]
+    H --> J[FAISS Retrieval\nUSE_DENSE=1 only]
+    I --> K[RRF Fusion\nReciprocal Rank Fusion]
+    J --> K
+    K --> L[Sector Filter\noptional]
+    L --> M[Cross-encoder Rerank\nUSE_DENSE=1 only]
+    M --> N[Dedup by doc + page]
+    N --> O[Groq LLM\nllama-3.3-70b-versatile]
+    O --> P([✅ Structured Answer\n+ Citations + PDF links])
 
-![Retrieval Pipeline](https://raw.githubusercontent.com/astitvabajpai/NiyamAI/main/docs/images/retrieval.svg)
+    E -.-> J
+    F -.-> I
+
+    style A fill:#0F172A,color:#fff
+    style G fill:#0F172A,color:#fff
+    style P fill:#2C3E1A,color:#fff
+    style O fill:#2C3E1A,color:#fff
+```
+
+### Retrieval Pipeline
+
+```mermaid
+flowchart LR
+    Q([Query + Acronym Expansion]) --> B1[BM25\nKeyword]
+    Q --> D1[FAISS\nDense]
+
+    B1 --> R[RRF Fusion]
+    D1 --> R
+
+    R --> SF[Sector Filter]
+    SF --> RE[Cross-encoder\nRerank]
+    RE --> DD[Dedup\ndoc + page]
+    DD --> OUT([Top-K Chunks\nwith metadata])
+
+    D1 -. USE_DENSE=1 only .-> R
+
+    style Q fill:#0F172A,color:#fff
+    style OUT fill:#2C3E1A,color:#fff
+```
 
 ## Tech Stack
 
-![Tech Stack](https://raw.githubusercontent.com/astitvabajpai/NiyamAI/main/docs/images/techstack.svg)
+```mermaid
+graph LR
+    subgraph Frontend
+        F1[Vanilla HTML/CSS/JS\ntemplates/index.html]
+        F2[marked.js\nMarkdown render]
+        F3[SSE EventSource\nLive streaming]
+    end
+    subgraph Backend
+        B1[FastAPI]
+        B2[Uvicorn]
+        B3[Groq API\nllama-3.3-70b]
+        B4[PyMuPDF\nPDF parsing]
+    end
+    subgraph Retrieval
+        R1[BM25\nrank-bm25]
+        R2[FAISS\nfaiss-cpu]
+        R3[SentenceTransformers\nBGE-small + CrossEncoder]
+    end
+    subgraph Storage
+        S1[SQLite\ncache · log · rate limiter]
+        S2[FAISS Index\n.faiss file]
+        S3[BM25 Pickle\n.pkl file]
+        S4[Metadata JSON\nchunk text + pages]
+    end
+```
 
 | Layer | Technology |
 |---|---|
