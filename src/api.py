@@ -9,7 +9,6 @@ import os
 import re
 import sqlite3
 import time
-from collections import defaultdict
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
@@ -60,6 +59,13 @@ def _init_db():
                 ts REAL NOT NULL
             )
         """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS rate_limit (
+                ip TEXT NOT NULL,
+                ts REAL NOT NULL
+            )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_rate_limit_ip_ts ON rate_limit (ip, ts)")
         conn.commit()
 
 
@@ -111,8 +117,12 @@ def _cache_count() -> int:
 
 # ── Grounding Score Calculator ───────────────────────────────────────────────
 def _calc_grounding(answer: str, chunks: list[dict]) -> int:
-    """Calculate empirical grounding score based on lexical token overlap with chunks.
-    shortcut: simple word overlap ratio, upgrade to NLI/semantic grounding model if needed.
+    """Calculate grounding score using lexical token overlap with retrieved chunks.
+
+    This is a simple word-overlap ratio — useful as a relative signal but NOT a
+    guarantee of factual accuracy. It measures how much of the generated answer's
+    vocabulary came from the retrieved passages. A low score may indicate the LLM
+    introduced content not present in the sources.
     """
     if not chunks or not answer or not answer.strip():
         return 0
@@ -167,20 +177,33 @@ def is_conversational_greeting(query: str) -> bool:
     return clean in GREETING_WORDS or bool(re.match(r"\b(hello|hi|hey)\s*$", clean))
 
 
-# ── Simple rate limiter ───────────────────────────────────────────────────────
-_rate: dict[str, list] = defaultdict(list)
+# ── Rate limiter (SQLite-backed, survives restarts) ──────────────────────────
 RATE_LIMIT = 40       # requests
 RATE_WINDOW = 60      # per second window
-# NOTE: Rate limit state is in-memory only; restarts reset counters. Persist to SQLite if needed.
 
 
 def _check_rate(client_ip: str) -> bool:
+    """Persistent rate limiter backed by SQLite. Survives process restarts."""
     now = time.time()
-    timestamps = [t for t in _rate[client_ip] if now - t < RATE_WINDOW]
-    _rate[client_ip] = timestamps
-    if len(timestamps) >= RATE_LIMIT:
-        return False
-    _rate[client_ip].append(now)
+    cutoff = now - RATE_WINDOW
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            conn.execute(
+                "DELETE FROM rate_limit WHERE ts < ?", (cutoff,)
+            )
+            cur = conn.execute(
+                "SELECT COUNT(*) FROM rate_limit WHERE ip = ? AND ts >= ?",
+                (client_ip, cutoff),
+            )
+            count = cur.fetchone()[0]
+            if count >= RATE_LIMIT:
+                return False
+            conn.execute(
+                "INSERT INTO rate_limit (ip, ts) VALUES (?, ?)", (client_ip, now)
+            )
+            conn.commit()
+    except Exception:
+        return True  # fail open on DB errors
     return True
 
 
@@ -212,7 +235,7 @@ class QueryRequest(BaseModel):
 class QueryResponse(BaseModel):
     answer: str
     citations: list[dict]
-    grounding_score: int = 96
+    grounding_score: int = 0
     context_chunks: list[dict] | None = None
     cached: bool = False
 

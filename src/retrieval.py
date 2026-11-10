@@ -7,6 +7,7 @@ Set USE_DENSE=1 to enable FAISS dense retrieval (requires sentence-transformers/
 import json
 import os
 import pickle
+import re
 from pathlib import Path
 
 import numpy as np
@@ -15,6 +16,60 @@ from rank_bm25 import BM25Okapi
 
 from dotenv import load_dotenv
 load_dotenv()
+
+# ── Acronym expansion for BM25 query preprocessing ──────────────────────────
+# Maps common RBI-domain abbreviations to their expanded forms so BM25 can
+# match passages that use the full term rather than the abbreviation.
+ACRONYM_MAP = {
+    "kyc": "know your customer",
+    "aml": "anti money laundering",
+    "cdd": "customer due diligence",
+    "ckycr": "central kyc registry",
+    "ovd": "officially valid document",
+    "psl": "priority sector lending",
+    "nbfc": "non banking financial company",
+    "emi": "equated monthly instalment",
+    "upi": "unified payments interface",
+    "neft": "national electronic funds transfer",
+    "rtgs": "real time gross settlement",
+    "imps": "immediate payment service",
+    "ppi": "prepaid payment instrument",
+    "pa": "payment aggregator",
+    "pg": "payment gateway",
+    "ews": "early warning signal",
+    "lcr": "liquidity coverage ratio",
+    "npa": "non performing asset",
+    "msme": "micro small medium enterprise",
+    "rrb": "regional rural bank",
+    "sfb": "small finance bank",
+    "ucb": "urban cooperative bank",
+    "lrs": "liberalised remittance scheme",
+    "fema": "foreign exchange management act",
+    "pmla": "prevention of money laundering act",
+    "vcip": "video based customer identification process",
+    "re": "regulated entity",
+    "rbi": "reserve bank of india",
+    "ird": "interest rate derivative",
+    "cbs": "core banking solution",
+    "atm": "automated teller machine",
+    "pos": "point of sale",
+}
+
+# Canonical sector names map: lowercased user input → exact directory name
+SECTOR_NAME_MAP = {
+    "kyc": "KYC",
+    "kyc & aml": "KYC",
+    "kyc and aml": "KYC",
+    "digital payment": "Digital Payment",
+    "digital payments": "Digital Payment",
+    "digital banking": "Digital Banking",
+    "fraud": "Fraud Risk Management",
+    "fraud risk": "Fraud Risk Management",
+    "fraud risk management": "Fraud Risk Management",
+    "priority sector": "Priority sector lending",
+    "priority sector lending": "Priority sector lending",
+    "psl": "Priority sector lending",
+}
 
 from src.ingestion import METADATA_PATH, FAISS_PATH, BM25_INDEX_PATH, EMBEDDING_MODEL, RERANKER_MODEL
 
@@ -66,7 +121,45 @@ class NiyamRetriever:
         self._loaded = True
         print("Retriever ready.")
 
-    def _filter_superseded(self, chunk_indices: list[int]) -> list[int]:
+    def _expand_query(self, query: str) -> str:
+        """Expand acronyms in the query for better BM25 recall."""
+        tokens = query.lower().split()
+        expanded = []
+        for token in tokens:
+            # Strip punctuation for lookup
+            clean = re.sub(r"[^\w]", "", token)
+            if clean in ACRONYM_MAP:
+                expanded.append(token)
+                expanded.append(ACRONYM_MAP[clean])
+            else:
+                expanded.append(token)
+        return " ".join(expanded)
+
+    def _normalize_sector(self, sector: str) -> str | None:
+        """Normalize user-supplied sector name to the exact directory name."""
+        if not sector or sector.lower() == "all":
+            return None
+        normalized = SECTOR_NAME_MAP.get(sector.lower().strip())
+        if normalized:
+            return normalized
+        # Fallback: case-insensitive prefix match against known dirs
+        for canonical in SECTOR_NAME_MAP.values():
+            if canonical.lower() == sector.lower():
+                return canonical
+        return sector  # pass through as-is so existing exact matches still work
+
+    def _dedup_chunks(self, chunk_indices: list[int]) -> list[int]:
+        """Remove duplicate (doc_name, page) pairs, keeping first occurrence."""
+        seen: set[tuple] = set()
+        deduped = []
+        for i in chunk_indices:
+            key = (self.metadata[i].get("doc_name", ""), self.metadata[i].get("page", -1))
+            if key not in seen:
+                seen.add(key)
+                deduped.append(i)
+        return deduped
+
+
         """Drop superseded chunks."""
         return [i for i in chunk_indices if not self.metadata[i].get("superseded", False)]
 
@@ -80,8 +173,9 @@ class NiyamRetriever:
         return indices[0].tolist()
 
     def keyword_retrieve(self, query: str, top_k: int = 50) -> list[int]:
-        """BM25 keyword retrieval."""
-        query_terms = query.lower().split()  # must match ingestion tokenization
+        """BM25 keyword retrieval with acronym expansion."""
+        expanded = self._expand_query(query)
+        query_terms = expanded.lower().split()  # must match ingestion tokenization
         scores = self.bm25.get_scores(query_terms)
         top_indices = np.argsort(scores)[::-1][:top_k].tolist()
         return top_indices
@@ -110,7 +204,7 @@ class NiyamRetriever:
         return [idx for idx, _ in scored[:top_k]]
 
     def retrieve(self, query: str, retrieval_k: int = None, rerank_top_k: int = None, top_k: int = None, sector: str = None) -> list[dict]:
-        """Full retrieval pipeline: dense + keyword → RRF → filter → rerank."""
+        """Full retrieval pipeline: dense + keyword → RRF → filter → rerank → dedup."""
         if not query or not query.strip():
             return []
         retrieval_k = retrieval_k or RETRIEVAL_K
@@ -132,17 +226,22 @@ class NiyamRetriever:
         if not fused:
             fused = keyword_results  # BM25-only fallback
 
-        # Step 3.5: Optional sector filter
-        if sector and sector.lower() != "all":
-            sec_lower = sector.lower()
+        # Step 3.5: Optional sector filter (normalized)
+        normalized_sector = self._normalize_sector(sector)
+        if normalized_sector:
             filtered_fused = [
                 i for i in fused
-                if self.metadata[i].get("rel_path", "").replace("\\", "/").startswith(f"{sector}/")
+                if self.metadata[i].get("rel_path", "").replace("\\", "/").startswith(f"{normalized_sector}/")
             ]
-            fused = filtered_fused
+            # Only apply filter if it yields results; otherwise return unfiltered
+            if filtered_fused:
+                fused = filtered_fused
 
         # Step 4: Rerank
         reranked = self.rerank(query, fused, top_k=rerank_top_k)
+
+        # Step 5: Deduplicate on (doc_name, page) to avoid redundant citations
+        reranked = self._dedup_chunks(reranked)
 
         # Return full metadata for top results
         return [self.metadata[i] for i in reranked]
