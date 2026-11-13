@@ -168,7 +168,7 @@ class NiyamRetriever:
                 deduped.append(i)
         return deduped
 
-
+    def _filter_superseded(self, chunk_indices: list[int]) -> list[int]:
         """Drop superseded chunks."""
         return [i for i in chunk_indices if not self.metadata[i].get("superseded", False)]
 
