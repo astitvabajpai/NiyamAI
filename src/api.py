@@ -209,12 +209,14 @@ def _check_rate(client_ip: str) -> bool:
 
 # ── Startup ───────────────────────────────────────────────────────────────────
 def _ensure_index():
-    """Build index from PDFs if indexes are missing (first-boot scenario on HF/Render)."""
+    """Warn if indexes are missing. Does NOT run ingestion on deploy —
+    PDFs are not committed to the repo. Run python -m src.ingestion locally
+    and commit the generated data/ files to rebuild."""
     if METADATA_PATH.exists() and BM25_INDEX_PATH.exists():
         return
-    print("Index not found. Running ingestion...")
-    from src.ingestion import process_pdfs
-    process_pdfs(PDF_DIR)
+    print("WARNING: Search indexes not found.")
+    print("  The app will start but all queries will return no results.")
+    print("  To fix: run  python -m src.ingestion  then redeploy.")
 
 
 @app.on_event("startup")

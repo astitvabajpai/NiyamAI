@@ -89,11 +89,17 @@ class NiyamRetriever:
         self._loaded = False
 
     def load(self):
-        """Load all indexes and metadata."""
+        """Load all indexes and metadata. Gracefully handles missing indexes."""
         print("Loading NiyamAI retriever...")
         print(f"  BM25_INDEX_PATH resolved: {BM25_INDEX_PATH.resolve()}")
         print(f"  METADATA_PATH resolved:   {METADATA_PATH.resolve()}")
         print(f"  BM25 exists: {BM25_INDEX_PATH.exists()}, Metadata exists: {METADATA_PATH.exists()}")
+
+        if not METADATA_PATH.exists() or not BM25_INDEX_PATH.exists():
+            print("  WARNING: Indexes not found. App will start but queries will return no results.")
+            print("  Run: python -m src.ingestion  to build the indexes.")
+            self._loaded = True  # mark loaded so we don't retry on every request
+            return
 
         # Load metadata
         with open(METADATA_PATH, "r", encoding="utf-8") as f:

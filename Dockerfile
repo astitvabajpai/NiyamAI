@@ -9,16 +9,13 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source
+# Copy source (indexes in data/ are committed and copied here)
 COPY . .
-
-# Ensure indexes exist; skip if already present (committed to repo)
-RUN bash scripts/ingest.sh
 
 RUN chown -R appuser:appuser /app
 USER appuser
 
-# HuggingFace Spaces uses port 7860
+# HuggingFace Spaces uses port 7860; Render uses $PORT
 EXPOSE 7860
 
 CMD ["sh", "-c", "uvicorn src.api:app --host 0.0.0.0 --port ${PORT:-7860}"]
