@@ -62,23 +62,32 @@ class NiyamEvaluator:
 
     def run_eval(self, dataset: list[dict]) -> dict:
         results = []
+        skipped = 0
         for i, item in enumerate(dataset):
             query = item["question"]
             expected_chunk = item.get("expected_chunk")
             expected_page = item.get("expected_page")
             topic = item.get("topic", "Unknown")
 
+            # Skip unannotated questions and not-in-corpus markers
+            if expected_chunk is None:
+                skipped += 1
+                continue
+            if expected_chunk == -1:
+                skipped += 1
+                continue
+
             print(f"  [{i+1}/{len(dataset)}] {query[:70]}...")
 
             chunks = self.retrieve(query)
 
-            recall_at_5 = 1.0 if expected_chunk and any(
+            recall_at_5 = 1.0 if any(
                 c.get("chunk_index") == expected_chunk for c in chunks[:5]
             ) else 0.0
 
             mrr = 0.0
             for rank, c in enumerate(chunks[:5]):
-                if expected_chunk and c.get("chunk_index") == expected_chunk:
+                if c.get("chunk_index") == expected_chunk:
                     mrr = 1.0 / (rank + 1)
                     break
 
@@ -98,7 +107,7 @@ class NiyamEvaluator:
                 "answer": answer,
             })
 
-        return {"config": self.config, "results": results}
+        return {"config": self.config, "results": results, "skipped": skipped}
 
     def save_results(self, results: dict, output_path: str = None):
         output_path = output_path or f"./data/eval_{self.config}.json"
